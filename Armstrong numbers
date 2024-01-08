@@ -1,0 +1,23 @@
+1-code for Armstrong numbers
+#include <stdio.h>
+void main()
+{
+int temp,d1,d2,d3;
+printf("All armstrong numbers between 1 and 100 are:\n");
+for(int n=1;n<=100;n++){
+if(n<=9)
+{
+printf("%d",n);
+}
+else
+{
+d1=n%10;
+d2=(n%100-d1)/10;
+d3=(n%1000-d2)/100;
+temp=(d1*d1*d1)+(d2*d2*d2)+(d3*d3*d3);
+if(temp==n){
+printf("%d",temp);
+}
+}
+}
+}
