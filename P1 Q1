@@ -1,0 +1,23 @@
+Q1- Input temperature in farahenheit and output the temperature in degree celcius
+Ans-
+Algorithm-
+Step1- start
+Step2- read /take input of of and declare c
+Step3- if(f>=-20&&f<=160) calculate c=(f-32)*5/9 and display c
+Step4 -else display the "The Temperature is out of Faraheneit Scale"
+Step5- stop
+Code-
+#include<stdio.h>
+#include<stdlib.h>
+int main(){
+double c,f;
+printf("Enter the temperature in farahenheit:");
+scanf("%lf",&f);
+if(f>=-20&&f<=160){
+c=(f-32)*5/9;
+printf("The Temperature in celcius is :%lf",c);
+}
+else{
+    printf("The Temperature is out of Faraheneit Scale");
+}
+}
