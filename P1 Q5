@@ -1,0 +1,40 @@
+//5- A ball released from height h each time it bounces on floor its velocity becomes halved write a c program which reads the value of y and prints total distance travelled by the ball when it touches the floor for 3rd time and g is 9.8
+//Ans-
+/* Algorithm
+step1- Start:
+Initialize variables i, space, rows=6, and k=0.
+step2- Main Loop:
+Start a loop from i=1 to i<=rows:
+Set k to 0 at the beginning of each iteration.
+step3- Print Spaces Loop:
+Inside the main loop, start a nested loop from space=1 to space<=rows-i:
+Print a space.
+Print Asterisks Loop:
+step4- Inside the main loop, start another loop-
+Loop while k is not equal to 2*i-1:
+Print an asterisk.
+Increment k.
+step5- Print Newline:
+Print a newline to move to the next row after completing each row.
+step6- End of Main Loop:
+End the main loop.
+step7- Stop:
+End the program. */
+
+//code
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+int main(){
+int b=3;
+double v,h,g=9.8,d=0;
+printf("Enter the Height of drop:");
+scanf("%lf",&h);
+for(int i=1;i<=b;i++){
+    v=sqrt(2*g*h);
+    d+=h;
+    h/=2;
+    v/=2;
+}
+printf("The distance covered by ball during %d time is:%lf",b,d);
+}
