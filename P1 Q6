@@ -1,0 +1,39 @@
+/*Q6- consider a bank offers fixed deposit accounts with cumulative interest on balance availaible in account. Write a C program that reads the amount  inititally invested inaccount and interest rate.
+The program Generates the balance availaible in account at end of each year for 5 years*/
+
+/* Algorithm-
+step1- Start:
+Initialize variables amt, inte, and i=1.
+step2- Input:
+Prompt the user to enter the initial investment (amt).
+Read the initial investment value from the user.
+step3- Input:
+Prompt the user to enter the interest rate (inte).
+Read the interest rate value from the user.
+step4- Loop:
+Start a loop from i=1 to i<=5:
+Calculate the new amount after one year using the formula: amt += (amt * inte) / 100.
+Print the amount after each year with a formatted message.
+step5- Print Total Amount:
+Print the total amount after 5 years with a formatted message.
+step6- Stop:
+End the program.*/
+
+//code-
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+int main(){
+double amt;
+printf("Enter the Investment:");
+scanf("%lf",&amt);
+double inte;
+printf("Enter the Interest(%):");
+scanf("%lf",&inte);
+int i=1;
+for(i=1;i<=5;i++){
+    amt+=((amt*inte)/100);
+    printf("The amount after %d yr is:%.2lf\n",i,amt);
+}
+printf("The total amount after 5 yrs is:%.2lf\n",amt);
+}
