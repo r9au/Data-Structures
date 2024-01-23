@@ -1,0 +1,88 @@
+/*Q3- Write functions to perform the following operations with two-dimensional 
+arrays.
+i) Reading any two dimensional array elements.
+ii) Finding maximum and standard deviation of array elements.
+iii) Printing the transpose of a matrix
+AnsAlgorithmStep1- start
+Step2- initialize function with parameters rows, cols, arr maxelement, stdev for transpose 
+,finding maximum and standard deviation of array elements
+Step3- create two loops for taking input of elements in 2d array in function void readArray
+Step4- initialize function findMaxAndStdDev with extra parameters maxelement
+Stdev
+a- initialize variables sum ,count , and mean
+b- calculate variance += pow(arr[i][j] - mean, 2) and *stdDev = sqrt(variance / count);
+step5- initialize function printTranspose create two loops first one from j=0 to j<rows
+and other one from i=0 to i<cols
+a- display arr[j][i]
+step6- call all the functions in main and passing appropriate paramters in each
+step7- stop
+*/
+#include <stdio.h>
+#include <math.h>
+// Function to read elements of a two-dimensional array
+void readArray(int rows, int cols, int arr[rows][cols]) {
+ printf("Enter the elements of the %dx%d array:\n", rows, cols);
+ for (int i = 0; i < rows; ++i) {
+ for (int j = 0; j < cols; ++j) {
+ printf("Enter element at position [%d][%d]: ", i, j);
+ scanf("%d", &arr[i][j]);
+ }
+ }
+}
+// Function to find the maximum element and standard deviation of array elements
+void findMaxAndStdDev(int rows, int cols, int arr[rows][cols], int *maxElement, float *stdDev) {
+ *maxElement = arr[0][0];
+ int sum = 0, count = 0;
+ for (int i = 0; i < rows; ++i) {
+ for (int j = 0; j < cols; ++j) {
+ // Finding maximum element
+ if (arr[i][j] > *maxElement) {
+ *maxElement = arr[i][j];
+ }
+ // Calculating sum for standard deviation
+ sum += arr[i][j];
+ count++;
+ }
+ }
+ // Calculating mean
+ float mean = (float)sum / count;
+ // Calculating standard deviation
+ float variance = 0;
+ for (int i = 0; i < rows; ++i) {
+ for (int j = 0; j < cols; ++j) {
+ variance += pow(arr[i][j] - mean, 2);
+ }
+ }
+ *stdDev = sqrt(variance / count);
+}
+// Function to print the transpose of a matrix
+void printTranspose(int rows, int cols, int arr[rows][cols]) {
+ printf("Transpose of the matrix:\n");
+ for (int j = 0; j < cols; ++j) {
+ for (int i = 0; i < rows; ++i) {
+ printf("%d\t", arr[i][j]);
+ }
+ printf("\n");
+ }
+}
+int main() {
+ // Example usage
+ int rows, cols;
+ printf("Enter the number of rows: ");
+ scanf("%d", &rows);
+ printf("Enter the number of columns: ");
+ scanf("%d", &cols);
+ int arr[rows][cols];
+ // Reading array elements
+ readArray(rows, cols, arr);
+ // Finding maximum element and standard deviation
+ int maxElement;
+ float stdDev;
+ findMaxAndStdDev(rows, cols, arr, &maxElement, &stdDev);
+ // Printing maximum element and standard deviation
+ printf("Maximum Element: %d\n", maxElement);
+ printf("Standard Deviation: %.2f\n", stdDev);
+ // Printing transpose of the matrix
+ printTranspose(rows, cols, arr);
+ return 0;
+}
