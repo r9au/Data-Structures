@@ -1,0 +1,29 @@
+/*Q1- Write a program to read an integer 1D array containing 8 bits (0s, 1s) of an 
+unsigned binary integer. The program should print the decimal value for the 
+integer.
+AnsAlgorithmStep1- start
+Step2- initialize array arr and variables sum and I,j
+Step3- take input of elements in array by looping from i=0 to 7
+Step4- create another loop to traverse through array elements and each one to sum
+Step5- calculate sum+=(arr[j]*pow(2,j)) for each element in loop
+Step6- display sum
+Step7- stop*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include<math.h>
+int main()
+{
+ int arr[8];
+ float sum=0;
+ for(int i=0;i<=7;i++){
+ printf("Enter the integer element %d:",i);
+ scanf("%d",&arr[i]);
+ //sum+=(arr[i]*pow(2,i));
+ }
+ for(int j=0;j<=7;j++){
+ sum+=(arr[j]*pow(2,j));
+ }
+ //sum=(float)sum;
+ printf("%.2f",sum);
+}
