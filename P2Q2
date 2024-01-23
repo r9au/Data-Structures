@@ -1,0 +1,95 @@
+/*Q2- Currency notes are available in the following seven denominations: Rs. 1, Rs. 
+2, Rs. 5, Rs. 10, Rs. 20, Rs.50, and Rs. 100.
+You will first read an integer array (named purse [7]) of seven elements, where 
+the array elements represents the number of notes of each denomination (in 
+increasing order of denomination) available with you. You are also given an 
+amount of money to be paid using these notes. The amount will be less than Rs. 
+1000. You have to pay the amount using minimum number of notes. Print the 
+number of notes of each denomination which you will use to pay the amount. If 
+the amount cannot be paid using the available notes, print "Failed to Pay".
+Ans
+Algorithm
+Step 1 - Start
+Step 2 - Initialize array arr1, arr2, pay, totalNotes, i, and j
+Step 3 - Input elements into array arr1 using a loop from i=0 to 6
+ a - Loop start
+ b - Display prompt for input
+ c - Read and store the input value in arr1[i]
+ d - Loop end
+Step 4 - Input elements into array arr2 using a loop from i=0 to 6
+ a - Loop start
+ b - Display prompt for input
+ c - Read and store the input value in arr2[i]
+ d - Loop end
+Step 5 - Input the amount to pay (pay)
+ a - Display prompt for input
+ b - Read and store the input value in pay
+Step 6 - Initialize p1, p2, and p3
+ a - Calculate p1 as (pay / 100) * 100
+ b - Calculate p2 as (pay / 10) * 10
+ c - Calculate p3 as pay % 10
+Step 7 - Loop from i=6 to 0
+ a - Loop start
+ b- Loop from j=6 to 0
+ c- Loop start
+ d- While arr1[i] * arr2[j] > p1
+ e- Decrease arr2[j] by 1
+ f- If arr1[i] * arr2[j] is equal to p1
+ g - Increment totalNotes by arr2[j]
+ h- Display "Rs. arr1[i]: arr2[j] notes"
+ i- Break from the loop
+ j – exit both loops
+Step 8 - Similar loop structures for p2 and p3
+Step 9 - Display The total number of notes used is: totalNotes
+Step 10 – stop*/
+#include <stdio.h>
+int main() {
+ int arr1[7] = {1, 2, 5, 10, 20, 50, 100};
+ int arr2[7] = {6, 5, 7, 8, 4, 5, 9};
+ int pay;
+ int totalNotes = 0;
+ printf("Enter the amount to pay: ");
+ scanf("%d", &pay);
+ int p1 = (pay / 100) * 100;
+ pay = pay % 100;
+ int p2 = (pay / 10) * 10;
+ int p3 = pay % 10;
+ for (int i = 6; i >= 0; i--) {
+ for (int j = 6; j >= 0; j--) {
+ while (arr1[i] * arr2[j] > p1) {
+ arr2[j]--;
+ }
+ if (arr1[i] * arr2[j] == p1) {
+ totalNotes += arr2[j];
+ printf("Rs. %d: %d notes\n", arr1[i], arr2[j]);
+ break;
+ }
+ }
+ }
+ for (int i = 6; i >= 0; i--) {
+ for (int j = 6; j >= 0; j--) {
+ while (arr1[i] * arr2[j] > p2) {
+ arr2[j]--;
+ }
+ if (arr1[i] * arr2[j] == p2) {
+ totalNotes += arr2[j];
+ printf("Rs. %d: %d notes\n", arr1[i], arr2[j]);
+ break;
+ }
+ }
+ }
+ for (int i = 6; i >= 0; i--) {
+ for (int j = 6; j >= 0; j--) {
+ while (arr1[i] * arr2[j] > p3) {
+ arr2[j]--;
+ }
+ if (arr1[i] * arr2[j] == p3) {
+ totalNotes += arr2[j];
+ printf("Rs. %d: %d notes\n", arr1[i], arr2[j]);
+ break;
+ }
+ }
+ }
+ printf("The total number of notes used is: %d\n", totalNotes);
+ return 0;
+}
