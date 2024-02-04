@@ -1,0 +1,30 @@
+/*Q1- Given two strings S1 and S2, write a program to print the number of times the first string S1 appears in the second string S2 as a substring. 
+For example if S1 is “atg” and S2 is “batgccatgatatga”, then the program should print 3. Program should work correctly
+for all possible inputs. DO NOT use any of the library functions defined under strings described above.*/
+#include<stdio.h>
+#include<stdlib.h>
+int cntsubs(char *s1,char *s2){
+int i=0,count=0;
+while(*s2){
+    int match=1;
+    for(i=0;s1[i];i++){
+        if(s1[i]!=s2[i]){
+            match=0;
+            break;
+        }
+    }
+    if(match){
+        count++;
+    }
+    s2++;
+}
+return count;
+}
+int main(){
+ char s1[]="at";
+ char s2[]="cataataxat";
+ int r=cntsubs(s1,s2);
+ printf("The number of counts of substring \'%s\' in string \'%s\' is:%d",s1,s2,r);
+ return 0;
+}
+
