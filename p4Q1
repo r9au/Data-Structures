@@ -1,0 +1,48 @@
+/*Q1-count the number of nodes in a list by using function
+Ans-
+Algorithm-
+Step1-start 
+Step2- Create the Structure node for linked list with contents or elements int data and struct node*next pointer
+Step3- Create a function count and read variable count=0 and pointer temp loop temp while it is not equal to NULL and increment count display the count in function
+Step4- declare the nodes like head -
+struct node*head;
+ head=(struct node*)malloc(sizeof(struct node));
+head->data=7;
+head->next=fst;
+step 5- assign the last node as null and call function countlist(head);
+step 6- stop
+*/
+#include <stdio.h>
+#include <stdlib.h>
+struct node{
+ int data;
+ struct node*next;
+};
+void countlist(struct node*ptr){
+int count=0;
+while(ptr!=NULL){
+    printf("%d\t",ptr->data);
+    ptr=ptr->next;
+    count++;
+}
+printf("\n");
+printf("Number of nodes in list:%d",count);
+}
+int main()
+{
+    struct node*head;
+    struct node*fst;
+    struct node*sec;
+    head=(struct node*)malloc(sizeof(struct node));
+    fst=(struct node*)malloc(sizeof(struct node));
+    sec=(struct node*)malloc(sizeof(struct node));
+    head->data=7;
+    head->next=fst;
+    fst->data=13;
+    fst->next=sec;
+    sec->data=46;
+    sec->next=NULL;
+    countlist(head);
+    return 0;
+}
+
