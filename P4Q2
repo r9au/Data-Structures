@@ -1,0 +1,40 @@
+/*Q2-Consider the following function baz() that takes a pointer to the first node of a linked list. void baz (link head)
+Ans-
+Algorithm-
+Step1-start
+Step2- create struct node with elements int key and  struct Node* next pointer
+Step3- create a pointer variable link typedef struct Node* link;  pointing towards head
+Step4-  if head==NULL return null value else recursively call baz(head->next->next) and display data of head
+Step5- create nodes of linkedlist and pass the head pointer in baz function
+Step6-stop
+*/
+//code-
+struct Node {
+    int key;
+    struct Node* next;
+};
+typedef struct Node* link;  // Define link as a pointer to a Node
+void baz(link head) {
+    if (head == NULL) {
+        return;
+    }
+baz(head->next->next);
+    printf("%d ", head->key);
+}
+int main() {
+    link head = malloc(sizeof(struct Node));
+    head->key = 1;
+    head->next = malloc(sizeof(struct Node));
+    head->next->key = 2;
+    head->next->next = malloc(sizeof(struct Node));
+    head->next->next->key = 3;
+    head->next->next->next = malloc(sizeof(struct Node));
+    head->next->next->next->key = 4;
+    head->next->next->next->next = malloc(sizeof(struct Node));
+    head->next->next->next->next->key = 5;
+    head->next->next->next->next->next = malloc(sizeof(struct Node));
+    head->next->next->next->next->next->key = 6;
+    head->next->next->next->next->next->next = NULL;
+
+    baz(head);
+    printf("\n");
