@@ -1,0 +1,53 @@
+/*Q1- write a function delete second to delete second to delete second node of list
+Ans-
+Algorithm-
+Step1- start 
+Step2- declare nodes fst, sec, thr and  fou and assign fst to head pointer and assign all data and next nodes
+Step3- declare printarray() and print data while temp->next!=NULL 
+Step4- declare delsecond() function and pass the second node by temp->next=temp->next->next where temp=head
+Step5- stop
+Code-*/
+void printarray(struct node*temp){
+    while(temp!=NULL){
+        printf("%d\t",temp->data);
+        temp=temp->next;
+    }
+}
+void delsecond(struct node*ptr){
+ptr->next=ptr->next->next;
+}
+int main(){
+ struct node*head;
+ struct node*temp;
+    struct node*fst;
+    struct node*sec;
+    struct node*thr;
+    struct node*fou;
+    struct node*newnode;
+    fst=(struct node*)malloc(sizeof(struct node));
+    sec=(struct node*)malloc(sizeof(struct node));
+    thr=(struct node*)malloc(sizeof(struct node));
+    fou=(struct node*)malloc(sizeof(struct node));
+    head=fst;
+    fst->data=7;
+    fst->next=sec;
+    sec->data=9;
+    sec->next=thr;
+    thr->data=10;
+    thr->next=fou;
+    fou->data=13;
+    fou->next=NULL;
+    //fou->data=12;
+    //fou->next=NULL;
+    //newnode=(struct node*)malloc(sizeof(struct node));
+    //newnode->data=11;
+    temp=head;
+
+    printarray(head);
+    printf("\n");
+    delsecond(temp);
+    printarray(head);
+
+    return 0;
+}
+
