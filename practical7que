@@ -1,0 +1,105 @@
+/*Q1-(a) Give a suitable typedef with a brief explanation for representing a
+job which comprises a positive integer identification number and another
+positive integer for job size given as the time needed for completing the job.
+(b) Give a suitable typedef with a brief explanation for representing a
+queue of jobs using either an array or a linked list. 
+(c) Give prototypes for the following functions
+on a queue of jobs (no need to write the function bodies). 
+empty – which returns a value indicating whether a given queue is empty
+or not, 
+enqueue – which puts a given job in a given queue, 
+front – which returns the job from the front of a given queue if the
+queue is not empty; otherwise it returns a job with a negative identification
+number, 
+dequeue – which deletes the front of a given queue
+(d) Write a function which takes a queue of jobs
+and a time slice and processes the jobs using the Round- Robin strategy until
+the completion of each of them. The function should use the functions of Part
+(c)
+*/
+//code-
+
+#include <stdio.h>
+#include <stdlib.h>
+// A struct to represent a job
+typedef struct {
+  int id;
+  int size;
+} Job;
+// A struct to represent a node in the linked list
+typedef struct Node {
+  Job job;
+  struct Node* next;
+} Node;
+// A struct to represent the queue
+typedef struct {
+  Node* front;
+  Node* rear;
+} Queue;
+// Function to check if the queue is empty
+int empty(Queue* queue) {
+  return queue->front == NULL;
+}
+// Function to add a job to the queue
+void enqueue(Queue* queue, Job job) {
+  Node* newNode = (Node*)malloc(sizeof(Node));
+  newNode->job = job;
+  newNode->next = NULL;
+
+  if (empty(queue)) {
+    queue->front = newNode;
+  } else {
+    queue->rear->next = newNode;
+  }
+  queue->rear = newNode;
+}
+// Function to get the job at the front of the queue
+Job front(Queue* queue) {
+  if (empty(queue)) {
+    Job job = {-1, -1};
+    return job;
+  }
+  return queue->front->job;
+}
+// Function to remove the job at the front of the queue
+void dequeue(Queue* queue) {
+  if (empty(queue)) {
+    return;
+  }
+  Node* temp = queue->front;
+  queue->front = queue->front->next;
+  if (queue->front == NULL) {
+    queue->rear = NULL;
+  }
+  free(temp);
+}
+
+// Function to process jobs using the Round-Robin strategy
+void processJobs(Queue* queue, int timeSlice) {
+  while (!empty(queue)) {
+    Job currentJob = front(queue);
+    currentJob.size -= timeSlice;
+
+    if (currentJob.size <= 0) {
+      dequeue(queue);
+      printf("Job %d completed\n", currentJob.id);
+    } else {
+      dequeue(queue);
+      currentJob.size = abs(currentJob.size);
+      enqueue(queue, currentJob);
+    }
+  }
+}
+int main() {
+  Queue queue;
+  queue.front = NULL;
+  queue.rear = NULL;
+
+  enqueue(&queue, (Job){1, 5});
+  enqueue(&queue, (Job){2, 3});
+  enqueue(&queue, (Job){3, 2});
+
+  processJobs(&queue, 1);
+
+  return 0;
+}
