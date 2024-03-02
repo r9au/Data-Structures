@@ -1,0 +1,77 @@
+/*Q1- Give a suitable typedef for representing a stack of integers using either an array
+(b) Write functions for implementing the following stack operations.
+init – which constructs and returns an empty stack,
+empty – which returns a value indicating whether a given stack is empty or not,
+push – which pushes a given integer on to a given stack,
+top – which returns the top element of a given stack,
+delete – which deletes the top element of a given stack.
+(c) Write an iterative  function which takes an unsigned integer and prints its representation to the base 5 using a stack; the function should use the data type defined by you for representing a stack and only the functions of Part (b).
+*/
+//code-
+
+typedef struct node{
+ int data;
+ struct node*next;
+}node;
+typedef struct{
+ node*top;
+}stack;
+stack*init(){
+stack*sta=(stack*)malloc(sizeof(stack));
+sta->top==NULL;
+return sta;
+}
+int empty(stack*sta){
+return sta->top==NULL;
+}
+void push(stack*sta,int data){
+node*newnode=(node*)malloc(sizeof(node));
+newnode->data=data;
+newnode->next=sta->top;
+sta->top=newnode;
+}
+int top(stack*sta){
+if(empty(sta)){
+    printf("The stack is empty\n");
+    return -1;
+}
+return sta->top->data;
+}
+void del(stack*sta){
+  if(empty(sta)){
+    printf("The stack is empty\n");
+  }
+    node*temp=sta->top;
+    sta->top=sta->top->next;
+    free(temp);
+}
+void printbase5(unsigned int num){
+ stack*sta=init();
+ if(num==0){
+    printf("0\n");
+    return;
+ }
+ while(num>0){
+    push(sta,num%5);
+    num/=5;
+ }
+ while(!empty(sta)){
+    printf("%d",top(sta));
+    del(sta);
+ }
+ printf("\n");
+ free(sta);
+}
+int main(){
+  stack*sta=init();
+  push(sta,3);
+  push(sta,4);
+  push (sta,6);
+  printf("The top element in stack is:%d\n",top(sta));
+  del(sta);
+  printf("The top element after deleting in stack is:%d\n",top(sta));
+  printf("printing the number in base 5:\n");
+  printbase5(25);
+  free(sta);
+  return 0;
+}
