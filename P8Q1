@@ -1,0 +1,59 @@
+/*Q1- Create a BST of N Integers: 6, 9, 5, 2, 8, 15, 24, 14, 7, 8, 5, 2
+Ans- 
+Algorithm-
+Step1- start
+Step2- Node Structure: Define a structure BinaryTreeNode with fields for key, left child pointer, and right child pointer.
+Step3- Create Node: Function createNode allocates memory for a new node, sets its key and child pointers to null, and returns the node.
+Step4- Insert Node: insertNode checks if empty, then inserts recursively based on value compared to root's key: smaller goes left, larger goes right.
+Step5- In-order Traversal: inorderTraversal visits left subtree, prints current node's key, then visits right subtree. Base case: do nothing if node is null.
+Step6- Build and Traverse: main initializes root, builds BST by inserting elements from an array, and prints the in-order traversal.
+Step7- stop
+
+Code-*/
+
+#include <stdio.h>
+#include <stdlib.h>
+// Define the structure for a BST node
+struct BinaryTreeNode {
+    int key;
+    struct BinaryTreeNode* left;
+    struct BinaryTreeNode* right;
+};
+
+// Function to create a new node
+struct BinaryTreeNode* createNode(int value) {
+    struct BinaryTreeNode* newNode = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+    newNode->key = value;
+    newNode->left = newNode->right = NULL;
+    return newNode;
+}
+// Function to insert a node into the BST
+struct BinaryTreeNode* insertNode(struct BinaryTreeNode* root, int value) {
+    if (root == NULL)
+        return createNode(value);
+    if (value < root->key)
+        root->left = insertNode(root->left, value);
+    else if (value > root->key)
+        root->right = insertNode(root->right, value);
+    return root;
+}
+// Function to perform an in-order traversal of the BST
+void inorderTraversal(struct BinaryTreeNode* root) {
+    if (root == NULL)
+return;
+    inorderTraversal(root->left);
+    printf("%d ", root->key);
+    inorderTraversal(root->right);
+}
+int main() {
+    struct BinaryTreeNode* root = NULL;
+    int values[] = {6, 9, 5, 2, 8, 15, 24, 14, 7, 8, 5, 2};
+    int n = sizeof(values) / sizeof(values[0]);
+    for (int i = 0; i < n; ++i)
+        root = insertNode(root, values[i]);
+    printf("In-order traversal of the BST: ");
+    inorderTraversal(root);
+    // Clean up memory (optional)
+    // Implement deletion if needed
+    return 0;
+}
