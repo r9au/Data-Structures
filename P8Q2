@@ -1,0 +1,105 @@
+/*Q2- Traverse the BST in Inorder, Preorder and Post Order
+Ans- 
+Algorithm-
+Step1- start
+Step2- Node Blueprint: Define a structure (like a blueprint) for each node in the tree. It holds data (key) and pointers to left and right child nodes (initially null).
+Step3- Node Creation: A function createNode allocates memory for a new node, sets its data value (key), and sets both child pointers to null.
+Step4- Node Insertion: insertNode works recursively. If empty, create a new node. Otherwise, compare the value to insert:
+1-Less than root's key- Insert in left subtree.
+2- Greater than root's key- Insert in right subtree.
+Step5- Traversals:
+1-In-order: Visit left, print current key, visit right (prints sorted data).
+2- Pre-order: Print current key, visit left, visit right.
+3- Post-order: Visit left, visit right, print current key.
+Step6- Building and Traversing:
+main initializes an empty root and builds the BST by inserting values.
+It then performs and prints the results of all three traversal methods.
+Step7- stop
+Code-*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define the structure for a BST node
+struct BinaryTreeNode {
+    int key;
+    struct BinaryTreeNode* left;
+    struct BinaryTreeNode* right;
+};
+
+// Function to create a new node
+struct BinaryTreeNode* createNode(int value) {
+    struct BinaryTreeNode* newNode = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+    newNode->key = value;
+    newNode->left = newNode->right = NULL;
+    return newNode;
+}
+
+// Function to insert a node into the BST
+struct BinaryTreeNode* insertNode(struct BinaryTreeNode* root, int value) {
+    if (root == NULL)
+        return createNode(value);
+
+    if (value < root->key)
+        root->left = insertNode(root->left, value);
+    else if (value > root->key)
+        root->right = insertNode(root->right, value);
+
+    return root;
+}
+
+// Function for in-order traversal of the BST
+void inorderTraversal(struct BinaryTreeNode* root) {
+    if (root == NULL)
+        return;
+
+    inorderTraversal(root->left);
+    printf("%d ", root->key);
+    inorderTraversal(root->right);
+}
+
+// Function for pre-order traversal of the BST
+void preorderTraversal(struct BinaryTreeNode* root) {
+    if (root == NULL)
+        return;
+
+    printf("%d ", root->key);
+    preorderTraversal(root->left);
+    preorderTraversal(root->right);
+}
+
+// Function for post-order traversal of the BST
+void postorderTraversal(struct BinaryTreeNode* root) {
+    if (root == NULL)
+        return;
+
+    postorderTraversal(root->left);
+    postorderTraversal(root->right);
+    printf("%d ", root->key);
+}
+
+int main() {
+    struct BinaryTreeNode* root = NULL;
+    int values[] = {6, 9, 5, 2, 8, 15, 24, 14, 7, 8, 5, 2};
+    int n = sizeof(values) / sizeof(values[0]);
+
+    for (int i = 0; i < n; ++i)
+        root = insertNode(root, values[i]);
+
+    printf("In-order traversal of the BST: ");
+    inorderTraversal(root);
+    printf("\n");
+
+    printf("Pre-order traversal of the BST: ");
+    preorderTraversal(root);
+    printf("\n");
+
+    printf("Post-order traversal of the BST: ");
+    postorderTraversal(root);
+    printf("\n");
+
+    // Clean up memory (optional)
+    // Implement deletion if needed
+
+    return 0;
+}
