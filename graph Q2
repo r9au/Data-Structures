@@ -1,0 +1,65 @@
+/*Q2- Create a Graph of N cities using Adjacency Matrix.
+Ans-
+Algorithm-
+
+1. start
+2. Initialize the Graph:
+   - Create an adjacency matrix of size NxN and initialize all values to zero.
+   - This matrix will represent the connections (edges) between cities.
+3. Input the Number of Cities (N):
+   - Read the total number of cities (N) from the user.
+4. Input the Edges (Connections):
+   - Read M pairs of integers (X, Y) representing edges (roads) between cities.
+   - For each pair, set `adjMatrix[X][Y] = 1` and `adjMatrix[Y][X] = 1` (for an undirected graph).
+5. Create the Adjacency Matrix:
+   - Iterate through the input pairs and update the adjacency matrix accordingly.
+   - If there's a road between city X and city Y, mark the corresponding matrix entries as 1.
+6. Display the Adjacency Matrix:
+   - Print the adjacency matrix to visualize the connections between cities.
+   - Traverse the matrix row by row and display the values (0 or 1) for each pair of cities.
+7-stop */
+
+#include <stdio.h>
+
+#define MAX_CITIES 100
+
+int adjMatrix[MAX_CITIES][MAX_CITIES];
+
+void add_edge(int v1, int v2) {
+    adjMatrix[v1][v2] = 1;
+    adjMatrix[v2][v1] = 1; // For an undirected graph
+}
+
+void print_matrix(int num_cities) {
+    for (int i = 1; i <= num_cities; i++) {
+        for (int j = 1; j <= num_cities; j++) {
+            printf("%d ", adjMatrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int num_cities;
+    printf("Enter the number of cities: ");
+    scanf("%d", &num_cities);
+
+    // Initialize adjacency matrix
+    for (int i = 1; i <= num_cities; i++) {
+        for (int j = 1; j <= num_cities; j++) {
+            adjMatrix[i][j] = 0;
+        }
+    }
+
+    // Example: Adding edges (customize as needed)
+    add_edge(1, 2);
+    add_edge(2, 3);
+    add_edge(4, 5);
+    add_edge(1, 5);
+
+    printf("Adjacency Matrix:\n");
+    print_matrix(num_cities);
+
+    return 0;
+}
+
