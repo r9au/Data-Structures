@@ -1,0 +1,76 @@
+/*Q1- Program  for the following operations on Graph(G) of Cities
+Ans-
+Algorithm
+1. Initialize the Graph:
+   - Create an adjacency matrix to represent the graph of cities.
+   - Initialize all entries in the matrix to zero (indicating no edges).
+
+2. Adding an Edge:
+   - To add an edge between two cities (vertices), set the corresponding matrix entries to 1.
+   - For example, if there's a road connecting city A and city B, set `adjMatrix[A][B] = 1` and `adjMatrix[B][A] = 1`.
+
+3. Removing an Edge:
+   - To remove an edge (e.g., if a road is closed), set the corresponding matrix entries back to zero.
+   - For example, if the road between city A and city B is closed, set `adjMatrix[A][B] = 0` and `adjMatrix[B][A] = 0`.
+
+4. Checking for Self-Loops:
+   - If adding an edge, ensure that `v1` and `v2` are not the same (avoid self-loops).
+   - If removing an edge, verify that an edge exists between `v1` and `v2` before removing it.
+
+5. Printing the Adjacency Matrix:
+   - Display the adjacency matrix to visualize the connections between cities.
+   - Iterate through rows and columns, printing the values (0 or 1) for each pair of cities.
+6. Customize and Extend:
+   - Customize the program by allowing user input for adding/removing edges.
+   - Implement additional graph operations (e.g., finding neighbors, checking connectivity, etc.).
+
+Code-
+*/
+#include <stdio.h>
+
+#define MAX_CITIES 100
+
+int adjMatrix[MAX_CITIES][MAX_CITIES];
+
+void add_edge(int v1, int v2) {
+    adjMatrix[v1][v2] = 1;
+    adjMatrix[v2][v1] = 1;
+}
+
+void remove_edge(int v1, int v2) {
+    adjMatrix[v1][v2] = 0;
+    adjMatrix[v2][v1] = 0;
+}
+
+void print_matrix(int num_cities) {
+    for (int i = 1; i <= num_cities; i++) {
+        for (int j = 1; j <= num_cities; j++) {
+            printf("%d ", adjMatrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int num_cities;
+    printf("Enter the number of cities: ");
+    scanf("%d", &num_cities);
+
+    // Initialize adjacency matrix
+    for (int i = 1; i <= num_cities; i++) {
+        for (int j = 1; j <= num_cities; j++) {
+            adjMatrix[i][j] = 0;
+        }
+    }
+
+    // Example: Adding edges (customize as needed)
+    add_edge(1, 2);
+    add_edge(2, 3);
+    add_edge(4, 5);
+    add_edge(1, 5);
+
+    printf("Adjacency Matrix:\n");
+    print_matrix(num_cities);
+
+    return 0;
+}
