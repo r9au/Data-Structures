@@ -1,0 +1,74 @@
+/*Q3-  Print all the nodes reachable from a given starting node in a digraph using DFS/BFS method
+Ans-
+Algorithm-
+
+1. start 
+2. Initialize the Graph:	
+   - Create an adjacency list or an adjacency matrix to represent the directed graph.
+   - Initialize all vertices as unvisited.
+
+3. Choose a Starting Vertex:
+   - Select the desired starting node (vertex) from which you want to find reachable nodes. 
+
+4. BFS Traversal:
+   - Enqueue the starting vertex into a queue.
+   - While the queue is not empty:
+     - Dequeue the front vertex.
+     - Mark it as visited.
+     - Enqueue all unvisited neighbors of the dequeued vertex.
+     - Repeat until the queue is empty.
+
+5. Print or Store Reachable Nodes:
+   - As you dequeue vertices during BFS, keep track of the visited nodes.
+   - Print or store the nodes visited during the traversal.
+
+6. Repeat for Other Starting Nodes (Optional):
+   - If you want to find reachable nodes from other starting vertices, repeat steps 2 to 4.
+7. stop
+*/
+#include <stdio.h>
+#include <stdbool.h>
+
+#define MAX_CITIES 100
+
+int adjMatrix[MAX_CITIES][MAX_CITIES];
+
+void bfs(int start, int num_cities) {
+    bool visited[MAX_CITIES] = {false};
+    int queue[MAX_CITIES];
+    int front = 0, rear = -1;
+
+    queue[++rear] = start;
+    visited[start] = true;
+
+    printf("Nodes reachable from city %d: ", start);
+    while (front <= rear) {
+        int current = queue[front++];
+        printf("%d ", current);
+
+        for (int i = 1; i <= num_cities; i++) {
+            if (adjMatrix[current][i] && !visited[i]) {
+                queue[++rear] = i;
+                visited[i] = true;
+            }
+        }
+    }
+    printf("\n");
+}
+
+int main() {
+    int num_cities;
+    printf("Enter the number of cities: ");
+    scanf("%d", &num_cities);
+
+    // Initialize adjacency matrix (customize edges as needed)
+    // Example: add_edge(1, 2); add_edge(2, 3); ...
+
+    int start_city;
+    printf("Enter the starting city index: ");
+    scanf("%d", &start_city);
+
+    bfs(start_city, num_cities);
+
+    return 0;
+}
